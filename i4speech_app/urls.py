@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """i4Speech_site URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

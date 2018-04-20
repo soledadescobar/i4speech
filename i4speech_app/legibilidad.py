@@ -1,4 +1,5 @@
-# Legibilidad 2 (beta)
+# -*- coding: utf-8 -*-
+#  Legibilidad 2 (beta)
 # Averigua la legibilidad de un texto
 # Spanish readability calculations
 # © 2016 Alejandro Muñoz Fernández

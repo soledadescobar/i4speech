@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .models import Textos, Ocasiones, Autores, Ejes
 import csv
 import time

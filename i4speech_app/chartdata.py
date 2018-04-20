@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .models import Textos, Autores, Escalafh, Escalamu, Escalasp, Escalagu, Escalain, Cr, Fh, Gu, Mu, Sp, Ocasiones, Ejes
 import django.utils.encoding
 import django.http.request
