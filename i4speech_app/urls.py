@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from . import views
-from django.conf.urls import include, url
+from django.conf.urls import include, url  # Corregi la importacion de URL. Debe ir aca, estaba en el lugar incorrecto
 from django.conf import settings
 from django.conf.urls.static import static
 
