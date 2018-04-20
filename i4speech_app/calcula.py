@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import legibilidad
+from . import legibilidad
 
 
 def c(texto):
