@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # Based on Mabodo's ipython notebook (https://github.com/mabodo/sibilizador)
 # (c) Mabodo
 
