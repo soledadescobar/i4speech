@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Original script: https://github.com/Axiacore/number-to-letters
 
 # Changes from the original: just adapted to python 3.
