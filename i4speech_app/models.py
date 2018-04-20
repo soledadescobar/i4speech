@@ -11,10 +11,6 @@ class Autores(models.Model):
     nombre = models.CharField(max_length=100, blank=True, null=True)
     twitter = models.CharField(max_length=50, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'autores'
-
     def __str__(self):
         return self.nombre
 
@@ -29,10 +25,6 @@ class Cr(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
-    class Meta:
-        managed = False
-        db_table = 'cr'
-
     def prom_cr(idautor, oca, ejes):
         prom = Cr.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_cr=Avg('resultado'))
@@ -45,10 +37,6 @@ class Escalafh(models.Model):
     resultado = models.CharField(max_length=50, blank=True, null=True)
     color = models.CharField(max_length=7, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'escalafh'
-
     def __str__(self):
         return str(self.color)
 
@@ -59,10 +47,6 @@ class Escalain(models.Model):
     resultado = models.CharField(max_length=50, blank=True, null=True)
     color = models.CharField(max_length=7, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'escalain'
-
     def __str__(self):
         return self.color
 
@@ -72,10 +56,6 @@ class Escalagu(models.Model):
     sup = models.FloatField(blank=True, null=True)
     resultado = models.CharField(max_length=50, blank=True, null=True)
     color = models.CharField(max_length=7, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'escalagu'
 
     def __str__(self):
         return self.color
@@ -89,10 +69,6 @@ class Escalasp(models.Model):
     estudios = models.CharField(max_length=50, blank=True, null=True)
     color = models.CharField(max_length=7, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'escalasp'
-
     def __str__(self):
         return str(self.color)
 
@@ -103,10 +79,6 @@ class Escalamu(models.Model):
     resultado = models.CharField(max_length=50, blank=True, null=True)
     color = models.CharField(max_length=7, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'escalamu'
-
     def __str__(self):
         return self.color
 
@@ -114,10 +86,6 @@ class Escalamu(models.Model):
 class Fh(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
-
-    class Meta:
-        managed = False
-        db_table = 'fh'
 
     def prom_fh(idautor, oca, ejes):
         prom = Fh.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
@@ -129,10 +97,6 @@ class Gu(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
-    class Meta:
-        managed = False
-        db_table = 'gu'
-
     def prom_gu(idautor, oca, ejes):
         prom = Gu.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_gu=Avg('resultado'))
@@ -143,22 +107,15 @@ class Mu(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
-    class Meta:
-        managed = False
-        db_table = 'mu'
-
     def prom_mu(idautor, oca, ejes):
         prom = Mu.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_mu=Avg('resultado'))
         return prom.get('prom_mu')
 
+
 class Sp(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
-
-    class Meta:
-        managed = False
-        db_table = 'sp'
 
     def prom_sp(idautor, oca, ejes):
         prom = Sp.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
@@ -169,20 +126,12 @@ class Sp(models.Model):
 class Ejes(models.Model):
     eje = models.CharField(max_length=255)
 
-    class Meta:
-        managed = False
-        db_table = 'ejes'
-
     def __str__(self):
         return self.eje
 
 
 class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ocasiones'
 
     def __str__(self):
         return self.ocasion
@@ -196,14 +145,8 @@ class Textos(models.Model):
     idocasion = models.ForeignKey('Ocasiones', models.DO_NOTHING, db_column='idocasion')
     ideje = models.ForeignKey(Ejes, models.DO_NOTHING, db_column='ideje', blank=True, null=True)
 
-
-    class Meta:
-        managed = False
-        db_table = 'textos'
-
     def __str__(self):
         return self.texto
-
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
@@ -228,11 +171,6 @@ class Textos(models.Model):
 class Indices (models.Model):
     indice = models.TextField(default='1')
     sigla = models.TextField()
-
-    class Meta:
-        managed = False
-        db_table = 'indices'
-
 
     def __str__(self):
         return self.indice
