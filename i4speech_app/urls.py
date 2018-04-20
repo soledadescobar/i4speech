@@ -21,15 +21,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    # url(r'^$', views.index, name='index'),
-    # url(r'^textos/$', views.TextosListView.as_view(), name='textos'),
-    # url(r'^nuevotexto/$', views.TextoNuevoView, name='nuevotexto'),
-    # url(r'^autores/$', views.AutoresListView.as_view(), name='autores'),
-    # url(r'^nuevoautor/$', views.AutorNuevoView, name='nuevoautor'),
-    # url(r'^autores/$', views.AutoresListView.as_view(), name='autores'),
-    # url(r'^resultados/$', views.ResultadosView, name='resultados'),
-    # url(r'^resultadoaso/$', views.ResultadoasoView, name='resultadoaso'),
-    # url(r'^dashboard/$', views.DashboardView, name='dashboard'),
-    # url(r'^cargacsv/$', views.CargaCSVView, name='cargacsv'),
-    # url(r'^textodetalle/(?P<pk>\d+)/$', views.TextoDetailView.as_view(), name='textodetalle'),
+    url(r'^$', views.index, name='index'),
+    url(r'^textos/$', views.TextosListView.as_view(), name='textos'),
+    url(r'^nuevotexto/$', views.TextoNuevoView, name='nuevotexto'),
+    url(r'^autores/$', views.AutoresListView.as_view(), name='autores'),
+    url(r'^nuevoautor/$', views.AutorNuevoView, name='nuevoautor'),
+    url(r'^autores/$', views.AutoresListView.as_view(), name='autores'),
+    url(r'^resultados/$', views.ResultadosView, name='resultados'),
+    url(r'^resultadoaso/$', views.ResultadoasoView, name='resultadoaso'),
+    url(r'^dashboard/$', views.DashboardView, name='dashboard'),
+    url(r'^cargacsv/$', views.CargaCSVView, name='cargacsv'),
+    url(r'^textodetalle/(?P<pk>\d+)/$', views.TextoDetailView.as_view(), name='textodetalle'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
