@@ -1,0 +1,110 @@
+.wave {
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 3px;
+    background: #303131;
+    animation: wave 1.3s linear infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -1.1s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: -0.9s;
+}
+
+@keyframes wave {
+    0%, 60%, 100% {
+        transform: initial;
+    }
+
+    30% {
+        transform: translateY(-15px);
+    }
+}
+
+.fancybox-inner {
+    height: auto !important;
+}
+
+.fancybox-wrap {
+    width: auto !important;
+}
+
+text.mono {
+    fill: black !important;
+}
+
+.i4MediaLogo {
+    background: url(../images/logoi4.png);
+    height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+}
+
+.title {
+    height: 100px;
+}
+
+.title h3 {
+    margin-top: 35px;
+}
+
+.headerRow {
+    margin-top: -20px;
+}
+
+.searchBox {
+    margin-top: -3px;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+}
+
+.anchorAsButton:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: FontAwesome;
+    src: url(../fonts/fontawesome-webfont.woff);
+}
+
+@font-face {
+    font-family: Fontello;
+    src: url(../fonts/fontello.woff);
+}
+
+@font-face {
+    font-family: Fontello-Social;
+    src: url(../fonts/fontello-social.woff);
+}
+

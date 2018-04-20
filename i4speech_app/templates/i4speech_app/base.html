@@ -1,0 +1,30 @@
+{% extends 'i4speech_app/bootstrap.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block bootstrap3_extra_head %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="{% static 'i4speech/css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'i4speech/css/chosen.css' %}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+    <script src="{% static 'i4speech/js/global.js' %}"></script>
+    <link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link href="{% static 'i4speech/css/bootstrap-tagsinput.css' %}" rel="stylesheet">
+    <script src="{% static 'i4speech/js/bootstrap-tagsinput.js' %}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="{% static 'i4speech/js/chosen.jquery.min.js' %}"></script>
+    <script src="{% static 'i4speech/js/jquery.min.js' %}"></script>
+    {% block extrahead %}{% endblock extrahead%}
+{% endblock %}
+{% block bootstrap3_content %}
+{% include 'i4speech_app/navbar.html' %}
+{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-112 col-sm-offset-3 col-md-8 col-md-offset-2 main align-content-center">
+            <h1 class="page-header">{% block title %}{% endblock %}</h1>
+                {% block content %}{% endblock %}
+        </div>
+</div>
+{% include 'i4speech_app/footer.html' %}
+{% endblock %}

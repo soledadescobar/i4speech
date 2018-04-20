@@ -1,0 +1,77 @@
+{% extends 'i4speech_app/basedashboard.html' %}
+{% load widget_tweaks %}
+{% load bootstrap3 %}
+{% block bootstrap3_extra_head %}
+    <!-- Load in jQuery and HighCharts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="http://code.highcharts.com/modules/drilldown.js"></script>
+    <!-- Maps the Python template context variables from views.py to the Highchart js variables -->
+    <script>
+        var chart = {{ chart|safe }}
+        var title = {{ title|safe }}
+        var xAxis = {{ xAxis|safe }}
+        var yAxis = {{ yAxis|safe }}
+        var series = {{series|safe }}
+        var drilldown = {{ drilldown|safe }}
+        var legend = {
+              enabled: true
+            }
+        var  tooltip = {
+              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+              pointFormat: '<span style="color:{point.color}">{point.name}<br>{point.fecha}</br></span><br>Índice: {point.y:.2f}<br/>'
+            }
+        var lang = { drillUpText: 'Volver'}
+    </script>
+    <!-- Highchart js. Variable map shown above -->
+    <script>
+    $(function () {
+      Highcharts.chart({{ chartID|safe }}, {
+          chart: chart,
+          title: title,
+          xAxis: xAxis,
+          yAxis: yAxis,
+          series: series,
+          drilldown: drilldown,
+          legend: legend,
+          tooltip:tooltip,
+          lang: lang
+   })});
+    </script>
+{% endblock %}
+{% block content %}
+    <form method="get">
+    <div class="container-fluid">
+    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapse1" role="button" aria-expanded="false" aria-controls="multiCollapse1">Seleccione los filtros</a>
+    <div class="collapse multi-collapse" id="multiCollapse1">
+     <div class="well">
+      <div class="row">
+          <div class="form-group col-sm-2 col col-md-6">
+          {{ filterindice.form.as_p }}
+          {% render_field filter.form.indice %}
+        </div>
+        <div class="form-group col-sm-2 col-md-6">
+          {{ filterautor.form.as_p }}
+          {% render_field filter.form.nombre %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2 col-md-6">
+          {{ filtereje.form.as_p }}
+          {% render_field filter.form.eje %}
+        </div>
+        <div class="form-group col-sm-2 col-md-6">
+          {{ filterocasion.form.as_p }}
+          {% render_field filter.form.ocasion %}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span> Filtrar
+      </button>
+    </div>
+    </div>
+    </div>
+  </form>
+    <div id={{ chartID|safe }} class="chart" style="height:500px; width:100%"></div>
+{% endblock %}

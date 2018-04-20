@@ -1,0 +1,12 @@
+{% extends "i4speech_app/base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+
+    <form role="form" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_form_errors form type='non_fields' %}
+        {% buttons submit='Guardar' reset="Cancelar" %}{% endbuttons %}
+    </form>
+
+{% endblock %}

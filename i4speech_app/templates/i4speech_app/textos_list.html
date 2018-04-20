@@ -1,0 +1,20 @@
+{% extends "i4speech_app/base.html" %}
+
+{% block content %}
+    <h1>Listado de textos</h1>
+
+    {% if textos_list %}
+    <ul>
+
+      {% for texto in textos_list %}
+      <li>
+        <a href="{% url 'textodetalle'  pk=texto.pk %}">{{ texto.titulo }}</a> ({{ texto.idautor.nombre }}) ({{ texto.fecha }})
+
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>No hay texots aún.</p>
+    {% endif %}
+{% endblock %}

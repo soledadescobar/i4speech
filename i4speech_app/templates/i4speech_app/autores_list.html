@@ -1,0 +1,19 @@
+{% extends "i4speech_app/base.html" %}
+
+{% block content %}
+    <h1>Listado de autores</h1>
+
+    {% if autores_list %}
+    <ul>
+
+      {% for autor in autores_list %}
+        <li>
+        {{ autor.nombre }}   Textos analizados:  {{ num_textos }}
+        </li>
+      {% endfor %}
+        {{ prom_cr }}
+    </ul>
+    {% else %}
+      <p>No hay autores aún.</p>
+    {% endif %}
+{% endblock %}

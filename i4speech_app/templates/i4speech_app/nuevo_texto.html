@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script>
+{% extends "i4speech_app/base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+    <form role="form" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_form_errors form type='all' %}
+        {% buttons submit='Analizar y Guardar' reset="Cancelar" %}{% endbuttons %}
+    </form>
+{% endblock %}

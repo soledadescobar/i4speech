@@ -1,0 +1,12 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}">i4 Speech</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            {% include 'i4speech_app/nav-section-resultados.html' %}
+            {% include 'i4speech_app/nav-section-textos.html' %}
+            {% include 'i4speech_app/nav-section-autores.html' %}
+        </ul>
+</div>
+</nav>

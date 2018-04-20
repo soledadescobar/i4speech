@@ -1,0 +1,23 @@
+{% extends 'i4speech_app/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <h1>i4 Speech <a href="http://i4group.co"> <img src="{% static 'i4speech/images/logoi4.png' %}" align="right" > </a> </h1>
+    <p>&nbsp;</p>
+   <p>  La facilidad de comprensión de un mensaje contribuye a su efectividad comunicacional. i4 Speech es una herramienta que ​almacena y procesa grandes volúmenes de texto proveniente de múltiples fuentes para extraer información valiosa.
+
+La aplicación integra y compara discursos políticos, noticias y comentarios de plataformas digitales utilizando fórmulas de legibilidad validadas para el idioma español.
+​
+       En Grupo i4, simplificamos y optimizamos el mensaje de nuestros clientes para alcanzar audiencias de manera directa y eficaz.</p>
+<p>&nbsp;</p>
+    <p>&nbsp;</p>
+     <p>&nbsp;</p>
+<div class="row">
+     <div class="col-sm-4"><a href="{% url 'nuevotexto' %}"><img src="{% static 'i4speech/images/if_edit_281873.png' %}" align="center" title="Nuevo Texto"></a> </div>
+     <div class="col-sm-4"><a href="{% url 'textos' %}"><img src="{% static 'i4speech/images/if_magnifier_281868.png' %}" align="center" title="Buscar Textos"></a> </div>
+     <div class="col-sm-4"><a href="{% url 'dashboard' %}"><img src="{% static 'i4speech/images/if_speedometer_376110.png' %}" align="center" title="Ver Resultados"></a> </div>
+</div>
+
+{% endblock %}
