@@ -135,7 +135,7 @@ class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return encoding.smart_str(self.ocasion)
+        return encoding.python_2_unicode_compatible(self.ocasion)
 
 
 class Textos(models.Model):
@@ -174,4 +174,4 @@ class Indices (models.Model):
     sigla = models.TextField()
 
     def __str__(self):
-        return  encoding.smart_str(self.indice)
+        return  encoding.python_2_unicode_compatible(self.indice)
