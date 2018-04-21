@@ -176,4 +176,4 @@ class Indices (models.Model):
 
 
     def __str__(self):
-        return  encoding.smart_str(self.indice)
+        return self.indice.encode('utf-8')
