@@ -135,7 +135,8 @@ class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return self.ocasion.encode('latin-1')
+        if self.ocasion.encode('utf-8').__contains__('ó'): print (self.ocasion.encode('utf-8'))
+        return self.ocasion.encode('utf-8')
 
 
 class Textos(models.Model):
