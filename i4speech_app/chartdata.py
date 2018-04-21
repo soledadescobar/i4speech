@@ -25,9 +25,8 @@ class ChartData():
         if 'eje' not in ejefil.data: lista_ejes = Ejes.objects.all().values('pk')
         else: lista_ejes = ejefil.data.getlist('eje')
         for autor in autores:
-            au = django.utils.encoding.force_text(autor.nombre,'utf-8')
-            data['autor'].append(au)
-            data['drilldown'].append(au)
+            data['autor'].append(autor.nombre.__str__())
+            data['drilldown'].append(autor.nombre.__str__())
             if 'cr' in data.keys():
                 data['cr'].append(Cr.prom_cr(autor.id,lista_ocasiones, lista_ejes))
                 color = '#00bfff'
