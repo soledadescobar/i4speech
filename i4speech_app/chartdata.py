@@ -78,8 +78,8 @@ class ChartData():
             if len(lista_textos) > 0:
                 for texto in lista_textos:
                     if 'indice' not in indfil.data == {}:
-                        color = Escalafh.objects.filter(inf__lte=texto.fh.resultado, sup__gte=texto.fh.resultado).first().color
-                        textodata = {'fecha': texto.fecha.__str__(), 'y': texto.fh.resultado, 'name':texto.titulo, 'color': color}
+                        color = (Escalafh.objects.filter(inf__lte=texto.fh.resultado, sup__gte=texto.fh.resultado).first().color).encode('utf-8').__str__()
+                        textodata = {'fecha': texto.fecha.__str__(), 'y': texto.fh.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color': color}
                     else:
                         if '1' in indfil.data.getlist('indice'):
                             textodata = {'fecha': texto.fecha.__str__(), 'y': texto.cr.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color':'#00bfff' }
