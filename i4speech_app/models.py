@@ -128,7 +128,7 @@ class Ejes(models.Model):
     eje = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.eje
+        return self.eje.encode('utf-8')
 
 
 class Ocasiones(models.Model):
