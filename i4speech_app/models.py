@@ -4,6 +4,7 @@ from i4speech_app import legibilidad
 from django.db import models
 from django.urls import reverse
 from django.db.models import Avg
+from django.utils import encoding
 
 
 
@@ -134,7 +135,7 @@ class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return self.ocasion.encode('utf-8')
+        return encoding.force_text(self.ocasion)
 
 
 class Textos(models.Model):
@@ -173,4 +174,4 @@ class Indices (models.Model):
     sigla = models.TextField()
 
     def __str__(self):
-        return self.indice.encode('utf-8')
+        return  encoding.force_text(self.indice)
