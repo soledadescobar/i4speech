@@ -135,7 +135,7 @@ class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return encoding.smart_unicode(self.ocasion)
+        return self.ocasion.encode('latin1')
 
 
 class Textos(models.Model):
