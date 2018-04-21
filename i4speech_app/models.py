@@ -26,6 +26,7 @@ class Cr(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
+    @staticmethod
     def prom_cr(idautor, oca, ejes):
         prom = Cr.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_cr=Avg('resultado'))
@@ -99,6 +100,7 @@ class Gu(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
+    @staticmethod
     def prom_gu(idautor, oca, ejes):
         prom = Gu.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_gu=Avg('resultado'))
@@ -109,6 +111,7 @@ class Mu(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
+    @staticmethod
     def prom_mu(idautor, oca, ejes):
         prom = Mu.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_mu=Avg('resultado'))
@@ -119,6 +122,7 @@ class Sp(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
+    @staticmethod
     def prom_sp(idautor, oca, ejes):
         prom = Sp.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_sp=Avg('resultado'))
