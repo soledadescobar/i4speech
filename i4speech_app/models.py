@@ -88,6 +88,7 @@ class Fh(models.Model):
     idtexto = models.OneToOneField('Textos', models.DO_NOTHING, db_column='idtexto', primary_key=True, unique=True)
     resultado = models.FloatField()
 
+    @staticmethod
     def prom_fh(idautor, oca, ejes):
         prom = Fh.objects.filter(idtexto__idautor_id=idautor, idtexto__idocasion__in=oca,
                                  idtexto__ideje__in=ejes).aggregate(prom_fh=Avg('resultado'))
