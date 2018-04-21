@@ -46,7 +46,7 @@ class ChartData():
                 prom_sp = Sp.prom_sp(autor.id, lista_ocasiones, lista_ejes)
                 color = Escalasp.objects.filter(inf__lte=prom_sp, sup__gte=prom_sp).first().color
                 data['sp'].append(Sp.prom_sp(autor.id, lista_ocasiones, lista_ejes))
-            data['color'].append(color)
+            data['color'].append(color.__str__())
         return data
 
     @staticmethod
