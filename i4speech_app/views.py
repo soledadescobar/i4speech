@@ -102,7 +102,7 @@ def DashboardView(request, chartID='chart_ID', chart_type='column', chart_height
     drilldown = ChartData.drilldowns (dataraw, filterindice, filterocasion, filtereje)
 
     chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}
-    title = {"text": 'Promedio por autor y tipo de índice'}
+    title = {"text": 'Promedio por autor y tipo de índice'.__str__()}
     xAxis = {"type": 'category', 'labels': {
             'rotation': -45,
             'style': {
