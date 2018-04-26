@@ -29,3 +29,6 @@ class NuevoAutorForm(forms.ModelForm):
         fields = ['nombre', 'twitter']
 
 
+class AnalizaTextoForm(forms.ModelForm):
+
+    textoparaanalizar = forms.CharField()
