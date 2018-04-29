@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^dashboard/$', views.DashboardView, name='dashboard'),
     url(r'^cargacsv/$', views.CargaCSVView, name='cargacsv'),
     url(r'^textodetalle/(?P<pk>\d+)/$', views.TextoDetailView.as_view(), name='textodetalle'),
+    url(r'^analizatexto/$', views.AnalizaTextoView, name='analizatexto'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
