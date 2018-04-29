@@ -24,7 +24,7 @@ from .cargacsv import CargaCSV
 from django.core.files.storage import FileSystemStorage
 from io import TextIOWrapper
 from .analizador import Analizador
-
+from django.utils import encoding
 
 def index(request):
     """
@@ -198,7 +198,7 @@ def AnalizaTextoView(request):
         # Create a form instance and populate it with data from the request (binding):
             form = AnalizaTextoForm(request.POST)
             if form.is_valid():
-                texto=form.data.get('textoparaanalizar')
+                texto=form.data.get('textoparaanalizar').encode('utf-8').__str__()
                 resultado = Analizador.analizatexto(texto)
     # If this is a GET (or any other method) create the default form.
     else:
