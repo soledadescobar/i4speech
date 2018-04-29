@@ -8,6 +8,7 @@ from django.views import generic
 from django.forms import ModelForm
 from .forms import NuevoTextoForm
 from .forms import NuevoAutorForm
+from .forms import AnalizaTextoForm
 from django.core.files.storage import default_storage
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -22,7 +23,7 @@ import django_filters
 from .cargacsv import CargaCSV
 from django.core.files.storage import FileSystemStorage
 from io import TextIOWrapper
-
+from .analizador import Analizador
 
 
 def index(request):
@@ -188,3 +189,18 @@ def CargaCSVView(request):
         res = CargaCSV.cargacsv(myfile)
         return render(request, 'i4speech_app/cargacsv.html')
     return render(request, 'i4speech_app/cargacsv.html')
+
+
+def AnalizaTextoView(request):
+    # If this is a POST request then process the Form data
+    resultado = []
+    if request.method == 'POST':
+        # Create a form instance and populate it with data from the request (binding):
+            form = AnalizaTextoForm(request.POST)
+            if form.is_valid():
+                texto=form.data.get('textoparaanalizar')
+                resultado = Analizador.analizatexto(texto)
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = AnalizaTextoForm(request.GET)
+    return render(request, 'i4speech_app/analizatexto.html', {'form': form, 'resultado': resultado})
