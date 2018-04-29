@@ -12,7 +12,6 @@ class Analizador():
         resfh = legibilidad.fernandez_huerta(texto)
         resultado['fh'].append(resfh)
         filaescala = Escalafh.objects.filter(inf__lte=resfh, sup__gte=resfh).first()
-        print(filaescala)
         resultado['fh'].append(filaescala.resultado)
         resultado['fh'].append(filaescala.color)
         resultado['fh'].append(filaescala.grado_escolar)
