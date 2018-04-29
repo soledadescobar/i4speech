@@ -40,8 +40,6 @@ class Escalafh(models.Model):
     color = models.CharField(max_length=7, blank=True, null=True)
     grado_escolar = models.CharField(max_length=50, blank=True, null=True)
 
-    def __str__(self):
-        return str(self.color)
 
 
 class Escalain(models.Model):
