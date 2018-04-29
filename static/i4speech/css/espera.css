@@ -1,0 +1,9 @@
+#loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -93px;
+    box-shadow: 0.5em 0.5em 0.7em #333;
+    border-radius: 1em;
+}
