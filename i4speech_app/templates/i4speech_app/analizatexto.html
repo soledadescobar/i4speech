@@ -1,0 +1,128 @@
+{% extends "i4speech_app/baseanalizador.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load i18n %}
+{% block bootstrap3_extra_head %}
+    <script src="{% static 'i4speech/js/jquery.min.js' %}"></script>
+    <script src="{% static 'i4speech/js/chosen.jquery.min.js' %}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="{% static 'i4speech/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'i4speech/css/espera.css' %}" rel="stylesheet">
+    <link href="{% static 'i4speech/css/chosen.css' %}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+    <script src="{% static 'i4speech/js/global.js' %}"></script>
+    <link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link href="{% static 'i4speech/css/bootstrap-tagsinput.css' %}" rel="stylesheet">
+    <script src="{% static 'i4speech/js/bootstrap-tagsinput.js' %}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script>
+        function espera(){
+            $(this).attr('disabled', 'disabled');
+            $(this).parents('.col-md-6').hide();
+            $('#loader').show();
+            $(this).parents('#form').submit();
+        };
+        function limpiaform(){
+                    document.getElementsByName("textoparaanalizar")[0].value="";
+                    document.getElementsByName("textoparaanalizar")[0].defaultValue="";
+        };
+    </script>
+    {% block extrahead %}{% endblock extrahead%}
+{% endblock %}
+{% block content %}
+    <div class="col-md-6">
+       <form role="form" method="post" onsubmit="return espera()">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_form_errors form type='all' %}
+        <div class="form-group"><button class="btn btn-default" type="submit">Analizar</button></div>
+        <div class="form-group"><button class="btn btn-default" type="reset" name="limpiar" onclick="return limpiaform()">Limpiar</button></div>
+       </form>
+ </div>
+    <div class="col-md-6">
+      <div class="container-fluid">
+           <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Perspicuidad (Szigriszt-Pazos)</th>
+                  <th>Resultado</th>
+                  <th>Tipo de Publicación</th>
+                  <th>Estudios</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr bgcolor = {{ resultado.sp.2 }}>
+                  <td>{{ resultado.sp.0 }}</td>
+                  <td>{{ resultado.sp.1 }}</td>
+                  <td>{{ resultado.sp.3 }}</td>
+                  <td>{{ resultado.sp.4 }}</td>
+                </tr>
+              </tbody>
+            </table>
+          <hr>
+           <table class="table">
+              <thead>
+                <tr>
+                  <th>Lecturabilidad - Fernández Huerta</th>
+                  <th>Resultado</th>
+                  <th>Grado Escolar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr bgcolor = {{ resultado.fh.2 }}>
+                  <td>{{ resultado.fh.0 }}</td>
+                  <td>{{ resultado.fh.1 }}</td>
+                  <td>{{ resultado.fh.3 }}</td>
+                </tr>
+              </tbody>
+           </table>
+          <hr>
+           <table class="table">
+              <thead>
+                <tr>
+                  <th>Escala INFLESZ - Facilidad de lectura</th>
+                  <th>Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr bgcolor = {{ resultado.in.2 }}>
+                  <td>{{ resultado.in.0 }}</td>
+                  <td>{{ resultado.in.1 }}</td>
+                </tr>
+              </tbody>
+           </table>
+          <hr>
+           <table class="table">
+              <thead>
+                <tr>
+                  <th>Legibilidad U</th>
+                  <th>Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr bgcolor = {{ resultado.mu.2 }}>
+                  <td>{{ resultado.mu.0 }}</td>
+                  <td>{{ resultado.mu.1 }}</td>
+                </tr>
+              </tbody>
+           </table>
+          <hr>
+           <table class="table">
+              <thead>
+                <tr>
+                  <th>Crawford - Años de Escolarización</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr bgcolor = {{ resultado.cr.1 }}>
+                  <td>{{ resultado.cr.0 }}</td>
+                </tr>
+              </tbody>
+           </table>
+      </div>
+   </div>
+    <div id="loader" style="display:none;">
+        <p><img src="{% static 'i4speech/images/loading.gif' %}" /></p>
+   </div>
+{% endblock %}

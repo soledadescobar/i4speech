@@ -1,0 +1,18 @@
+{% extends 'i4speech_app/bootstrap.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block bootstrap3_extra_head %}
+    {% block extrahead %}
+    {% endblock extrahead%}
+{% endblock %}
+{% block bootstrap3_content %}
+{% include 'i4speech_app/navbar.html' %}
+{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+<div class="container-fluid">
+    <br>
+    <h1 class="page-header">{% block title %}i4Speech - Analizador de textos de i4 Group{% endblock %}</h1>
+    <div class="row">
+                {% block content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
