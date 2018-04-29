@@ -89,13 +89,12 @@ WSGI_APPLICATION = 'i4speech.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'i4speech',
-        'USER': 'postgres',
-        'PASSWORD': 'wolf1010',
-        'HOST': 'localhost',
+        'USER': 'i4group',
+        'PASSWORD': 'a5X@RTsr-98v',
+        'HOST': '104.197.148.208',
         'PORT': '5432',
     }
 }
