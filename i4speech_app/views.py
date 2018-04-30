@@ -183,6 +183,7 @@ def CargaCSVView(request):
 def AnalizaTextoView(request):
     # If this is a POST request then process the Form data
     resultado = []
+    texto = ""
     if request.method == 'POST':
         # Create a form instance and populate it with data from the request (binding):
             form = AnalizaTextoForm(request.POST)
