@@ -192,7 +192,7 @@ def AnalizaTextoView(request):
     # If this is a GET (or any other method) create the default form.
     else:
         form = AnalizaTextoForm(request.GET)
-    return render(request, 'i4speech_app/analizatexto.html', {'form': form, 'resultado': resultado})
+    return render(request, 'i4speech_app/analizatexto.html', {'form': form, 'resultado': resultado, 'texto': texto})
 
 #def to_unicode_or_bust(obj, encoding="latin1"):
 #    if isinstance(obj, basestring):
