@@ -10,11 +10,12 @@ class Analizador():
         resultado['cr'].append('#669999')
 
         resfh = legibilidad.fernandez_huerta(texto)
-        resultado['fh'].append(resfh)
-        filaescala = Escalafh.objects.filter(inf__lte=resfh, sup__gte=resfh).first()
-        resultado['fh'].append(filaescala.resultado)
-        resultado['fh'].append(filaescala.color)
-        resultado['fh'].append(filaescala.grado_escolar)
+        if resfh > 0 and resfh <= 100:
+            resultado['fh'].append(resfh)
+            filaescala = Escalafh.objects.filter(inf__lte=resfh, sup__gte=resfh).first()
+            resultado['fh'].append(filaescala.resultado)
+            resultado['fh'].append(filaescala.color)
+            resultado['fh'].append(filaescala.grado_escolar)
 
         resgu = legibilidad.gutierrez(texto)
         resultado['gu'].append(resgu)
