@@ -198,7 +198,7 @@ def AnalizaTextoView(request):
         # Create a form instance and populate it with data from the request (binding):
             form = AnalizaTextoForm(request.POST)
             if form.is_valid():
-                texto=encoding.smart_text(form.data.get('textoparaanalizar'))
+                texto=form.data.get('textoparaanalizar')
                 resultado = Analizador.analizatexto(texto)
     # If this is a GET (or any other method) create the default form.
     else:
