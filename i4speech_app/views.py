@@ -1,30 +1,19 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.shortcuts import render
-
-# Create your views here.
-from django.http import HttpResponse
 from .models import Textos, Autores, Cr, Fh, Gu, Mu, Sp, Ocasiones, Indices, Ejes
 from django.views import generic
-from django.forms import ModelForm
 from .forms import NuevoTextoForm
 from .forms import NuevoAutorForm
 from .forms import AnalizaTextoForm
-from django.core.files.storage import default_storage
-
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models.fields.files import FieldFile
-from django.views.generic import FormView
-from django.views.generic.base import TemplateView
-from django.contrib import messages
 from django.db.models import Avg
 from django import forms
 from .chartdata import ChartData
 import django_filters
 from .cargacsv import CargaCSV
-from django.core.files.storage import FileSystemStorage
 from io import TextIOWrapper
 from .analizador import Analizador
-from django.utils import encoding
+from django.utils import encoding, six
 
 def index(request):
     """
@@ -198,9 +187,15 @@ def AnalizaTextoView(request):
         # Create a form instance and populate it with data from the request (binding):
             form = AnalizaTextoForm(request.POST)
             if form.is_valid():
-                texto=form.data.get('textoparaanalizar')
+                texto=six.u(form.data.get('textoparaanalizar'))
                 resultado = Analizador.analizatexto(texto)
     # If this is a GET (or any other method) create the default form.
     else:
         form = AnalizaTextoForm(request.GET)
     return render(request, 'i4speech_app/analizatexto.html', {'form': form, 'resultado': resultado})
+
+#def to_unicode_or_bust(obj, encoding="latin1"):
+#    if isinstance(obj, basestring):
+#        if not isinstance(obj, unicode):
+#            obj=unicode(obj, encoding)
+#    return obj
