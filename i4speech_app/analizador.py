@@ -39,8 +39,10 @@ class Analizador():
             resultado['sp'].append(filaescala.estudios)
 
         resin = ressp
-        resultado['in'].append(resin)
-        filaescala = Escalain.objects.filter(inf__lte=resin, sup__gte=resin).first()
-        resultado['in'].append(filaescala.resultado)
-        resultado['in'].append(filaescala.color)
+        if resin > 0 and resin <= 100:
+            resultado['in'].append(resin)
+            filaescala = Escalain.objects.filter(inf__lte=resin, sup__gte=resin).first()
+            resultado['in'].append(filaescala.resultado)
+            resultado['in'].append(filaescala.color)
+            
         return resultado
