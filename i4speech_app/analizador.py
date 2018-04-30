@@ -30,12 +30,13 @@ class Analizador():
         resultado['mu'].append(filaescala.color)
 
         ressp = legibilidad.szigriszt_pazos(texto)
-        resultado['sp'].append(ressp)
-        filaescala = Escalasp.objects.filter(inf__lte=ressp, sup__gte=ressp).first()
-        resultado['sp'].append(filaescala.resultado)
-        resultado['sp'].append(filaescala.color)
-        resultado['sp'].append(filaescala.tipopublicacion)
-        resultado['sp'].append(filaescala.estudios)
+        if ressp > 0 and ressp <= 100:
+            resultado['sp'].append(ressp)
+            filaescala = Escalasp.objects.filter(inf__lte=ressp, sup__gte=ressp).first()
+            resultado['sp'].append(filaescala.resultado)
+            resultado['sp'].append(filaescala.color)
+            resultado['sp'].append(filaescala.tipopublicacion)
+            resultado['sp'].append(filaescala.estudios)
 
         resin = ressp
         resultado['in'].append(resin)
