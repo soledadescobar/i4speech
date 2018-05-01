@@ -13,7 +13,7 @@ class Autores(models.Model):
     twitter = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.nombre.encode('utf-8')
+        return str(self.nombre)
 
     #def get_absolute_url(self):
         """
@@ -134,15 +134,14 @@ class Ejes(models.Model):
     eje = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.eje.encode('utf-8')
+        return str(self.eje)
 
 
 class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        if self.ocasion.encode('utf-8').__contains__('ó'): print (self.ocasion.encode('utf-8'))
-        return self.ocasion.encode('utf-8')
+        return str(self.ocasion)
 
 
 class Textos(models.Model):
@@ -154,7 +153,7 @@ class Textos(models.Model):
     ideje = models.ForeignKey(Ejes, models.DO_NOTHING, db_column='ideje', blank=True, null=True)
 
     def __str__(self):
-        return self.texto
+        return self.texto.encode('utf-8')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
@@ -182,4 +181,4 @@ class Indices (models.Model):
 
 
     def __str__(self):
-        return self.indice.encode('utf-8')
+        return str(self.indice)
