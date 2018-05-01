@@ -19,14 +19,14 @@ class ChartData():
              if '5' in indfil.data.getlist('indice'): data.update({'sp': []})
         if  'nombre' not in autfil.data: lista_autores= Autores.objects.all().values('id')
         else: lista_autores= autfil.data.getlist('nombre')
-        autores= Autores.objects.filter(pk__in=lista_autores)
         if 'ocasion' not in ocfil.data: lista_ocasiones = Ocasiones.objects.all().values('pk')
         else: lista_ocasiones= ocfil.data.getlist('ocasion')
         if 'eje' not in ejefil.data: lista_ejes = Ejes.objects.all().values('pk')
         else: lista_ejes = ejefil.data.getlist('eje')
+        autores = Autores.objects.filter(pk__in=lista_autores)
         for autor in autores:
-            data['autor'].append(autor.nombre.encode('utf-8').__str__())
-            data['drilldown'].append(autor.nombre.encode('utf-8').__str__())
+            data['autor'].append(autor.nombre)
+            data['drilldown'].append(autor.nombre)
             if 'cr' in data.keys():
                 data['cr'].append(Cr.prom_cr(autor.id,lista_ocasiones, lista_ejes))
                 color = '#00bfff'
@@ -46,7 +46,7 @@ class ChartData():
                 prom_sp = Sp.prom_sp(autor.id, lista_ocasiones, lista_ejes)
                 color = Escalasp.objects.filter(inf__lte=prom_sp, sup__gte=prom_sp).first().color
                 data['sp'].append(Sp.prom_sp(autor.id, lista_ocasiones, lista_ejes))
-            data['color'].append(color.__str__())
+            data['color'].append(color)
         return data
 
     @staticmethod
@@ -78,23 +78,23 @@ class ChartData():
             if len(lista_textos) > 0:
                 for texto in lista_textos:
                     if 'indice' not in indfil.data == {}:
-                        color = (Escalafh.objects.filter(inf__lte=texto.fh.resultado, sup__gte=texto.fh.resultado).first().color).encode('utf-8').__str__()
-                        textodata = {'fecha': texto.fecha.__str__(), 'y': texto.fh.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color': color}
+                        color = (Escalafh.objects.filter(inf__lte=texto.fh.resultado, sup__gte=texto.fh.resultado).first().color).__str__()
+                        textodata = {'fecha': texto.fecha.__str__(), 'y': texto.fh.resultado, 'name':texto.titulo.__str__(), 'color': color}
                     else:
                         if '1' in indfil.data.getlist('indice'):
-                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.cr.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color':'#00bfff' }
+                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.cr.resultado, 'name':texto.titulo.__str__(), 'color':'#00bfff' }
                         if '2' in indfil.data.getlist('indice'):
-                            color = (Escalagu.objects.filter(inf__lte=texto.gu.resultado, sup__gte=texto.gu.resultado).first().color).encode('utf-8').__str__()
-                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.gu.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color': color.__str__}
+                            color = Escalagu.objects.filter(inf__lte=texto.gu.resultado, sup__gte=texto.gu.resultado).first().color
+                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.gu.resultado, 'name':texto.titulo.__str__(), 'color': color}
                         if '3' in indfil.data.getlist('indice'):
-                            color = (Escalafh.objects.filter(inf__lte=texto.fh.resultado, sup__gte=texto.fh.resultado).first().color).encode('utf-8').__str__()
-                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.fh.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color': color.__str__}
+                            color = Escalafh.objects.filter(inf__lte=texto.fh.resultado, sup__gte=texto.fh.resultado).first().color
+                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.fh.resultado, 'name':texto.titulo.__str__(), 'color': color}
                         if '4' in indfil.data.getlist('indice'):
-                            color = (Escalamu.objects.filter(inf__lte=texto.mu.resultado, sup__gte=texto.mu.resultado).first().color).encode('utf-8').__str__()
-                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.mu.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color': color.__str__}
+                            color = Escalamu.objects.filter(inf__lte=texto.mu.resultado, sup__gte=texto.mu.resultado).first().color
+                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.mu.resultado, 'name':texto.titulo.__str__(), 'color': color}
                         if '5' in indfil.data.getlist('indice'):
-                            color = (Escalasp.objects.filter(inf__lte=texto.sp.resultado, sup__gte=texto.sp.resultado).first().color).encode('utf-8').__str__()
-                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.sp.resultado, 'name':texto.titulo.encode('utf-8').__str__(), 'color': color.__str__}
+                            color = Escalasp.objects.filter(inf__lte=texto.sp.resultado, sup__gte=texto.sp.resultado).first().color
+                            textodata = {'fecha': texto.fecha.__str__(), 'y': texto.sp.resultado, 'name':texto.titulo.__str__(), 'color': color}
                     serie['data'].append(textodata)
                 drilldown['series'].append(serie)
         return drilldown
