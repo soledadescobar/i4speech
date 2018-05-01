@@ -13,7 +13,7 @@ class Autores(models.Model):
     twitter = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.nombre.encode('utf-8')
+        return self.nombre
 
     #def get_absolute_url(self):
         """
