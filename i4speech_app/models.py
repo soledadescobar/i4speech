@@ -13,7 +13,7 @@ class Autores(models.Model):
     twitter = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return str(self.nombre)
+        return str(self.nombre.encode('utf-8'))
 
     #def get_absolute_url(self):
         """
@@ -51,7 +51,7 @@ class Escalain(models.Model):
     color = models.CharField(max_length=7, blank=True, null=True)
 
     def __str__(self):
-        return self.color
+        return str(self.color)
 
 
 class Escalagu(models.Model):
@@ -61,7 +61,7 @@ class Escalagu(models.Model):
     color = models.CharField(max_length=7, blank=True, null=True)
 
     def __str__(self):
-        return self.color
+        return str(self.color)
 
 
 class Escalasp(models.Model):
@@ -83,7 +83,7 @@ class Escalamu(models.Model):
     color = models.CharField(max_length=7, blank=True, null=True)
 
     def __str__(self):
-        return self.color
+        return str(self.color)
 
 
 class Fh(models.Model):
@@ -134,14 +134,14 @@ class Ejes(models.Model):
     eje = models.CharField(max_length=255)
 
     def __str__(self):
-        return str(self.eje)
+        return str(self.eje.encode('utf-8'))
 
 
 class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return str(self.ocasion)
+        return str(self.ocasion.encode('utf-8'))
 
 
 class Textos(models.Model):
@@ -181,4 +181,4 @@ class Indices (models.Model):
 
 
     def __str__(self):
-        return str(self.indice)
+        return str(self.indice.encode('utf-8'))
