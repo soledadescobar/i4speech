@@ -18,20 +18,22 @@
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sqlite3
+import re
+from .models import Subtlex
+from . import legibilidad
 
-def rare_words(wordlist):
-    '''
-    List of rare words (not in the SUBTLEX-ESP database). Fix this: make only one query instead of one per word. It'll be faster
-    '''
-    dbpath = "/home/protected/db/SUBTLEX-ESP.db"
-    
-    conn = sqlite3.connect(dbpath)
+def rare_words(text):
+    text =''.join(c if c not in map(str,range(0,10)) else "" for c in text)
+    wordlist =  map(lambda x: x.lower(), re.sub("[^\w]", " ", text).split())
     rarewords = []
-    cur = conn.cursor()
     for word in wordlist:
-        cur.execute('SELECT 1 FROM frecuencias WHERE palabra = ? LIMIT 1', (word,))
-        if not cur.fetchone():
+        if not Subtlex.objects.filter(palabra=word).exists() and word not in rarewords:
             rarewords.append(word)
-    conn.close()
+    return rarewords
+
+def dificult_words(text):
+    text =''.join(c if c not in map(str,range(0,10)) else "" for c in text)
+    wordlist =  map(lambda x: x.lower(), re.sub("[^\w]", " ", text).split())
+    worddb = Subtlex.objects.filter(palabra__in=wordlist).values('palabra', 'freqpermillion').order_by('freqpermillion')[:30]
+    rarewords =  [entry for entry in worddb]
     return rarewords

@@ -14,6 +14,7 @@ from .cargacsv import CargaCSV
 from io import TextIOWrapper
 from .analizador import Analizador
 from django.utils import encoding, six
+from . import legibilidad, rarewords
 
 def index(request):
     """
@@ -183,20 +184,30 @@ def CargaCSVView(request):
 def AnalizaTextoView(request):
     # If this is a POST request then process the Form data
     resultado = []
+    parrafos = 0
+    oraciones = 0
+    palabras = 0
+    silabas = 0
     texto = ""
+    palabrasraras = []
     if request.method == 'POST':
         # Create a form instance and populate it with data from the request (binding):
             form = AnalizaTextoForm(request.POST)
             if form.is_valid():
                 texto = form.data.get('textoparaanalizar')
                 resultado = Analizador.analizatexto(texto)
+                parrafos = legibilidad.count_paragraphs(texto)
+                oraciones = legibilidad.count_sentences(texto)
+                palabras = legibilidad.count_words(texto)
+                silabas = legibilidad.count_all_syllables(texto)
+                palabrasraras = rarewords.rare_words(texto)
+                palabrasdificiles = rarewords.dificult_words(texto)
     # If this is a GET (or any other method) create the default form.
     else:
         form = AnalizaTextoForm(request.GET)
-    return render(request, 'i4speech_app/analizatexto.html', {'form': form, 'resultado': resultado, 'texto': texto})
+    return render(request, 'i4speech_app/analizatexto.html', {'form': form, 'resultado': resultado, 'texto': texto,
+                                                              'parrafos': parrafos, 'oraciones': oraciones,
+                                                              'palabras': palabras, 'silabas': silabas,
+                                                              'palabrasraras': palabrasraras,
+                                                              'palabrasdificiles': palabrasdificiles})
 
-#def to_unicode_or_bust(obj, encoding="latin1"):
-#    if isinstance(obj, basestring):
-#        if not isinstance(obj, unicode):
-#            obj=unicode(obj, encoding)
-#    return obj

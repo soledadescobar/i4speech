@@ -31,13 +31,48 @@
 {% endblock %}
 {% block content %}
     <div class="col-md-6">
+
        <form role="form" method="post" onsubmit="return espera()">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_form_errors form type='all' %}
-        <div class="form-group"><button class="btn btn-default" type="submit">Analizar</button></div>
-        <div class="form-group"><button class="btn btn-default" type="reset" name="limpiar" onclick="return limpiaform()">Limpiar</button></div>
+        <div class="form-group"><button class="btn btn-default" type="submit">Analizar</button><class="form-group"><button class="btn btn-default" type="reset" name="limpiar" onclick="return limpiaform()">Limpiar</button></div>
        </form>
+    <div class="container-fluid">
+           <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Párrafos</th>
+                  <th>Oraciones</th>
+                  <th>Palabras</th>
+                  <th>Sílabas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ parrafos}}</td>
+                  <td>{{ oraciones }}</td>
+                  <td>{{ palabras }}</td>
+                  <td>{{ silabas }}</td>
+                </tr>
+              </tbody>
+            </table>
+           <table class="table table-sm">
+               <thead>
+                <tr>
+                  <th>Palabras extrañas o mal escritas</th>
+               </tr>
+              </thead>
+              <tbody>
+                {% for palabra in palabrasraras %}
+                    <tr>
+                        <td>{{ palabra }}</td>
+                    </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+
+    </div>
  </div>
     <div class="col-md-6">
       <div class="container-fluid">
@@ -119,6 +154,22 @@
                 </tr>
               </tbody>
            </table>
+          <table class="table table-sm">
+               <thead>
+                <tr>
+                  <th>Palabras poco frecuentes</th>
+                  <th>Frecuencia por millón</th>
+               </tr>
+              </thead>
+              <tbody>
+                {% for palabra in palabrasdificiles %}
+                    <tr>
+                        <td>{{ palabra.palabra }}</td>
+                        <td>{{ palabra.freqpermillion }}</td>
+                    </tr>
+              {% endfor %}
+              </tbody>
+            </table>
       </div>
    </div>
     <div id="loader" style="display:none;">
