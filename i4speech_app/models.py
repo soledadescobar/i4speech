@@ -13,7 +13,7 @@ class Autores(models.Model):
     twitter = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return str(self.nombre.encode('utf-8'))
+        return str(self.nombre)
 
     #def get_absolute_url(self):
         """
@@ -134,14 +134,14 @@ class Ejes(models.Model):
     eje = models.CharField(max_length=255)
 
     def __str__(self):
-        return str(self.eje.encode('utf-8'))
+        return str(self.eje)
 
 
 class Ocasiones(models.Model):
     ocasion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return str(self.ocasion.encode('utf-8'))
+        return str(self.ocasion)
 
 
 class Textos(models.Model):
@@ -153,7 +153,7 @@ class Textos(models.Model):
     ideje = models.ForeignKey(Ejes, models.DO_NOTHING, db_column='ideje', blank=True, null=True)
 
     def __str__(self):
-        return self.texto.encode('utf-8')
+        return self.texto
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
@@ -181,4 +181,18 @@ class Indices (models.Model):
 
 
     def __str__(self):
-        return str(self.indice.encode('utf-8'))
+        return str(self.indice)
+
+
+class Subtlex(models.Model):
+    palabra = models.CharField(primary_key=True, max_length=50)
+    freqpermillion = models.FloatField(blank=True, null=True)
+    logfreq = models.FloatField(blank=True, null=True)
+    freqcount = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'i4speech_app_subtlex'
+
+    def __str__(self):
+        return str(self.palabra)

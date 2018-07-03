@@ -92,9 +92,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'i4speech',
-        'USER': 'i4group',
-        'PASSWORD': 'a5X@RTsr-98v',
-        'HOST': '104.197.148.208',
+        'USER': 'postgres',
+        'PASSWORD': 'wolf1010',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

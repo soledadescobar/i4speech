@@ -190,6 +190,7 @@ def AnalizaTextoView(request):
     silabas = 0
     texto = ""
     palabrasraras = []
+    palabrasdificiles = []
     if request.method == 'POST':
         # Create a form instance and populate it with data from the request (binding):
             form = AnalizaTextoForm(request.POST)
